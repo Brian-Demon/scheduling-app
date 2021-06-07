@@ -2,12 +2,8 @@
 
 <% if current_user %>
   <h5>You are logged in as: <%= current_user.first_name %> <%= current_user.last_name %></h5>
-  <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-secondary" %>
 <% else %>
   <div class="row m-3">
-    <%= button_to "Login", login_path, method: :get, class: "btn btn-secondary" %>
-  </div>
-  <div class="row m-3">
-    <%= button_to "Register", register_path, method: :get, class: "btn btn-secondary" %>
+    CALL TO ACTION!
   </div>
 <% end %>
