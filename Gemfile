@@ -31,6 +31,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Cancancan gem
 gem 'cancancan', '>= 3.2.0'
 
+# React Rails gem
+gem 'react-rails'
+
 
 
 group :development, :test do
