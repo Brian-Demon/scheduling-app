@@ -34,6 +34,9 @@ gem 'cancancan', '>= 3.2.0'
 # React Rails gem
 gem 'react-rails'
 
+# Rexml gem
+gem 'rexml'
+
 
 
 group :development, :test do
