@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_17_204844) do
+ActiveRecord::Schema.define(version: 2021_10_25_232139) do
+
+  create_table "exclusions", force: :cascade do |t|
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "shifts", force: :cascade do |t|
     t.integer "user_id"
@@ -28,8 +40,7 @@ ActiveRecord::Schema.define(version: 2021_08_17_204844) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "manager", default: false
-    t.boolean "admin", default: false
+    t.string "role"
   end
 
 end
