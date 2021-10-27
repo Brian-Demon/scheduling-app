@@ -16,7 +16,17 @@ class ShiftsController < ApplicationController
   end
 
   def create
-    @shift = Shift.new(shift_params)
+    @user = User.find_by(id: params[:shift][:user_id])
+    @schedule = Schedule.find_by(id: params[:shift][:schedule_id])
+    start_at = DateTime.new(*((1..5).map { |e| params["shift"]["start(#{e}i)"].to_i }))
+    # raise "test"
+    end_at = DateTime.new(*((1..5).map { |e| params["shift"]["end(#{e}i)"].to_i }))
+    @shift = Shift.new(
+      user: @user,
+      schedule: @schedule,
+      start: start_at,
+      end: end_at,
+    )
 
     respond_to do |format|
       if @shift.save
