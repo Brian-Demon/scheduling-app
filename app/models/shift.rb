@@ -1,4 +1,6 @@
 class Shift < ApplicationRecord
-  has_one :user
+  belongs_to :user
   belongs_to :schedule
+  
+  validates :schedule, presence: true
 end
