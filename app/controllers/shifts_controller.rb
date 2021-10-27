@@ -1,25 +1,20 @@
 class ShiftsController < ApplicationController
   before_action :set_shift, only: %i[ show edit update destroy ]
 
-  # GET /shifts or /shifts.json
   def index
     @shifts = Shift.all
   end
 
-  # GET /shifts/1 or /shifts/1.json
   def show
   end
 
-  # GET /shifts/new
   def new
     @shift = Shift.new
   end
 
-  # GET /shifts/1/edit
   def edit
   end
 
-  # POST /shifts or /shifts.json
   def create
     @shift = Shift.new(shift_params)
 
@@ -34,7 +29,6 @@ class ShiftsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /shifts/1 or /shifts/1.json
   def update
     respond_to do |format|
       if @shift.update(shift_params)
@@ -47,7 +41,6 @@ class ShiftsController < ApplicationController
     end
   end
 
-  # DELETE /shifts/1 or /shifts/1.json
   def destroy
     @shift.destroy
     respond_to do |format|
@@ -57,13 +50,11 @@ class ShiftsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_shift
       @shift = Shift.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def shift_params
-      params.require(:shift).permit(:user_id, :start, :end)
+      params.require(:shift).permit(:user_id, :schedule_id, :start, :end)
     end
 end
