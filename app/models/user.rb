@@ -5,4 +5,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: "must be a valid email address" }
   validates_uniqueness_of :email
+
+  def employee_name
+    "#{first_name} #{last_name}"
+  end
 end
