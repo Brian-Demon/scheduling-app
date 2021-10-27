@@ -24,8 +24,8 @@ class ShiftsController < ApplicationController
     @shift = Shift.new(
       user: @user,
       schedule: @schedule,
-      start: start_at,
-      end: end_at,
+      shift_start: start_at,
+      shift_end: end_at,
     )
 
     respond_to do |format|
