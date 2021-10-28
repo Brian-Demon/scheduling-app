@@ -13,17 +13,34 @@
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
+    <%= form.collection_select(
+      :user_id,
+      User.all,
+      :id,
+      :employee_name,
+      prompt: "-- Select Employee --",
+    ) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :schedule_id %>
+    <%= form.collection_select(
+      :schedule_id,
+      Schedule.all,
+      :id,
+      :schedule_name,
+      prompt: "-- Select Schedule --",
+    ) %>
   </div>
 
   <div class="field">
     <%= form.label :start %>
-    <%= form.datetime_select :start %>
+    <%= form.datetime_select :shift_start %>
   </div>
 
   <div class="field">
     <%= form.label :end %>
-    <%= form.datetime_select :end %>
+    <%= form.datetime_select :shift_end %>
   </div>
 
   <div class="actions">

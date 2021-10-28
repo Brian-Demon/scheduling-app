@@ -1,11 +1,1 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  user_id: 1
-  start: 2021-08-17 15:48:44
-  end: 2021-08-17 15:48:44
-
-two:
-  user_id: 1
-  start: 2021-08-17 15:48:44
-  end: 2021-08-17 15:48:44
