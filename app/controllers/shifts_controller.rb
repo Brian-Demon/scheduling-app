@@ -18,9 +18,8 @@ class ShiftsController < ApplicationController
   def create
     @user = User.find_by(id: params[:shift][:user_id])
     @schedule = Schedule.find_by(id: params[:shift][:schedule_id])
-    start_at = DateTime.new(*((1..5).map { |e| params["shift"]["start(#{e}i)"].to_i }))
-    # raise "test"
-    end_at = DateTime.new(*((1..5).map { |e| params["shift"]["end(#{e}i)"].to_i }))
+    start_at = assemble_datetime_from_params(params["shift"], "start")
+    end_at = assemble_datetime_from_params(params["shift"], "end")
     @shift = Shift.new(
       user: @user,
       schedule: @schedule,
@@ -57,6 +56,10 @@ class ShiftsController < ApplicationController
       format.html { redirect_to shifts_url, notice: "Shift was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def assemble_datetime_from_params(hash, key)
+    DateTime.new(*((1..5).map { |e| hash["#{key}(#{e}i)"].to_i }))
   end
 
   private
