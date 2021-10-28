@@ -18,8 +18,8 @@ class ShiftsController < ApplicationController
   def create
     @user = User.find_by(id: params[:shift][:user_id])
     @schedule = Schedule.find_by(id: params[:shift][:schedule_id])
-    start_at = assemble_datetime_from_params(params["shift"], "start")
-    end_at = assemble_datetime_from_params(params["shift"], "end")
+    start_at = assemble_datetime_from_params(params["shift"], "shift_start")
+    end_at = assemble_datetime_from_params(params["shift"], "shift_end")
     @shift = Shift.new(
       user: @user,
       schedule: @schedule,
