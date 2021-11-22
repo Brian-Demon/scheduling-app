@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post "register", to: "registrations#create"
 
   get "login", to: "sessions#new"
+  get "/auth/:provider/callback", to: "sessions#create"
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
 
