@@ -37,6 +37,13 @@ gem 'react-rails'
 # Rexml gem
 gem 'rexml'
 
+# Google Oauth required gems
+gem 'omniauth'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2'
+
+# Form Formatting
+gem 'simple_form'
 
 
 group :development, :test do
