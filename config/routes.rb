@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root to: "home#index"
 
-  resources :users
+  resources :users do
+    get "account", to: "users#show", on: :member
+    patch "account", to: "users#update", on: :member
+  end
 
   get "register", to: "registrations#new"
   post "register", to: "registrations#create"

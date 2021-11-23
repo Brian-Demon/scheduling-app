@@ -1,29 +1,36 @@
-<p id="notice"><%= notice %></p>
+<h1>
+  <%= "Acount for #{@user.first_name} #{@user.last_name}" %>
+</h1>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<%= simple_form_for(@user, url: account_user_path(@user), method: :patch) do |form| %>
+  <%= render "shared/form_errors", form: form %>
 
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
+  <div class="mb-3">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name,
+      class: "form-control",
+      placeholder: "First Name",
+      input_html: { value: @user.first_name || '[ENTER FIRST NAME]' }
+    %>
+  </div>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
+  <div class="mb-3">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
+  </div>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
+  <div class="mb-3">
+    <%= form.label :email, required: false %>
+    <%= form.text_field :email, class: "form-control", placeholder: "employee@business.com" %>
+  </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @user.title %>
-</p>
+  <div class="mb-5">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Title" %>
+  </div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+
+  <div class="mb-3">
+    <%= form.submit "Update", class: "btn btn-primary" %>
+  </div>
+<% end %>
