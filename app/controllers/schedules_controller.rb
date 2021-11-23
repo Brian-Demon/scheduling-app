@@ -31,7 +31,7 @@ class SchedulesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @schedule.update(schedule)
+      if @schedule.update(schedule_params)
         format.html { redirect_to @schedule, notice: "Schedule was successfully updated." }
         format.json { render :show, status: :ok, location: @schedule }
       else
