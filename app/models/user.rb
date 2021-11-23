@@ -3,8 +3,8 @@ class User < ApplicationRecord
   has_many :shifts
   has_many :exclusions
 
-  validates :password, presence: true, :unless => :provider_present?
-  validates_confirmation_of :password, :unless => :provider_present?
+  validates :password, presence: true, :unless => :provider_present?, on: :create
+  validates_confirmation_of :password, :unless => :provider_present?, on: :create
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: "must be a valid email address" }
 
   def employee_name
