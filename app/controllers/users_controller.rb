@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user
 
-  def account
+  def show
   end
 
   def update

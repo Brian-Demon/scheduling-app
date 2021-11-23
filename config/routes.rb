@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   root to: "home#index"
 
-  resources :users do
-    get "account", on: :member
-    patch "account", to: "users#update", on: :member
-  end
+  resources :users
 
   get "register", to: "registrations#new"
   post "register", to: "registrations#create"
@@ -22,6 +19,4 @@ Rails.application.routes.draw do
   resources :shifts
   
   resources :schedules
-
-  # resources :accounts, only: [:show]
 end
