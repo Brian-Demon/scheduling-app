@@ -2,7 +2,7 @@
   <%= "Acount for #{@user.first_name} #{@user.last_name}" %>
 </h1>
 
-<%= simple_form_for(@user, url: user_path(@user), method: :patch) do |form| %>
+<%= simple_form_for(@user, url: account_user_path(@user), method: :patch) do |form| %>
   <%= render "shared/form_errors", form: form %>
 
   <div class="mb-3">
