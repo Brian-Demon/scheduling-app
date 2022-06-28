@@ -37,6 +37,13 @@ gem 'react-rails'
 # Rexml gem
 gem 'rexml'
 
+# Active Model Serializer
+gem 'active_model_serializers'
+
+# Fast Json API
+gem 'fast_jsonapi'
+
+
 # Google Oauth required gems
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
