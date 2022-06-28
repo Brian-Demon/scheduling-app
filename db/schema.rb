@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_10_28_201500) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "exclusions", force: :cascade do |t|
     t.datetime "start_at"
     t.datetime "end_at"
