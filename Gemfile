@@ -39,10 +39,15 @@ gem 'react-rails'
 # Rexml gem
 gem 'rexml'
 
-# Google Oauth required gems
+# Omniauth gem
 gem 'omniauth'
+
+# Google Oauth required gems
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
+
+# Facebook Oauth required gem
+gem 'omniauth-facebook'
 
 # Form Formatting
 gem 'simple_form'

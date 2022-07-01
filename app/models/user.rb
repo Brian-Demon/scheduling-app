@@ -12,12 +12,21 @@ class User < ApplicationRecord
   end
 
   def self.create_with_omniauth(auth)
+    provider = auth["provider"]
     create! do |user|
-      user.provider = auth["provider"]
+      user.provider = provider
       user.uid = auth["uid"]
       user.email = auth["info"]["email"]
-      user.first_name = auth["info"]["first_name"]
-      user.last_name = auth["info"]["last_name"]
+
+      case provider
+      when "google_oauth2"
+        user.first_name = auth["info"]["first_name"]
+        user.last_name = auth["info"]["last_name"]
+      when "facebook"
+        user.first_name = auth["info"]["name"].split(" ").first
+        user.last_name = auth["info"]["name"].split(" ").last
+      else
+      end
     end
   end
 
