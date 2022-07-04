@@ -39,14 +39,21 @@ gem 'react-rails'
 # Rexml gem
 gem 'rexml'
 
-# Google Oauth required gems
+# Farady gem
+gem 'faraday'
+
+# OmniAuth gem
 gem 'omniauth'
+
+# Google Oauth required gems
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
 
+# Intuit Oauth gem
+gem 'omniauth-intuit', github: 'Brian-Demon/omniauth-intuit', branch: 'master'
+
 # Form Formatting
 gem 'simple_form'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

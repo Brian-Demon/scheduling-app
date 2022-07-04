@@ -1,4 +1,8 @@
 class SessionsController < ApplicationController
+  DEV_INTUIT_BASE_URL = "https://sandbox-accounts.platform.intuit.com"
+  PROD_INPUT_BASE_URL = "https://accounts.platform.intuit.com"
+  INTUIT_USERINFO_API_ENDPOINT = "/v1/openid_connect/userinfo"
+
   def create
     auth = request.env["omniauth.auth"]
     user = auth ? authenticate_with_omniauth(auth) : authenticate_with_form(params)
@@ -18,6 +22,20 @@ class SessionsController < ApplicationController
   end
 
   def authenticate_with_omniauth(auth)
+    provider = auth["provider"]
+    if provider == "intuit"
+      token = auth["credentials"]["token"]
+      conn = Faraday.new(DEV_INTUIT_BASE_URL) do |conn|
+        conn.request :authorization, 'Bearer', token
+      end
+      response = conn.get(INTUIT_USERINFO_API_ENDPOINT)
+      body = JSON.parse(response.body)
+      auth["info"]["email"] = body["email"]
+      auth["info"]["first_name"] = body["givenName"]
+      auth["info"]["last_name"] = body["familyName"]
+      auth["uid"] = body["sub"]
+      byebug
+    end
     User.find_or_create_with_omniauth(auth)
   end
 
