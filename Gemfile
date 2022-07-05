@@ -47,13 +47,18 @@ gem 'fast_jsonapi'
 
 
 # Google Oauth required gems
+# OmniAuth gem
 gem 'omniauth'
+
+# Google Oauth required gems
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
 
+# Intuit Oauth gem
+gem 'omniauth-intuit-oauth2', '~> 0.2.0'
+
 # Form Formatting
 gem 'simple_form'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
