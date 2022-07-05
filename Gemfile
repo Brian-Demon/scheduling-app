@@ -50,7 +50,7 @@ gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
 
 # Intuit Oauth gem
-gem 'omniauth-intuit', github: 'Brian-Demon/omniauth-intuit', branch: 'master'
+gem 'omniauth-intuit-oauth2', '~> 0.2.0'
 
 # Form Formatting
 gem 'simple_form'
