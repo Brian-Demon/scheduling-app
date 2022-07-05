@@ -1,10 +1,11 @@
+import React from 'react'
 import axios from 'axios'
 
 const Landing = () => {
 
-  content = 
+  let content = 
     <>
-      <div className='py-4'>
+      <div>
         <h1>LANDING PAGE</h1>
       </div>
     </>
