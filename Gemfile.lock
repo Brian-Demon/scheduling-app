@@ -290,7 +290,6 @@ DEPENDENCIES
   capybara (>= 3.26)
   factory_bot_rails
   faker
-  faraday
   jbuilder (~> 2.7)
   listen (~> 3.3)
   omniauth

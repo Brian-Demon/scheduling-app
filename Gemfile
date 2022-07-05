@@ -39,9 +39,6 @@ gem 'react-rails'
 # Rexml gem
 gem 'rexml'
 
-# Farady gem
-gem 'faraday'
-
 # OmniAuth gem
 gem 'omniauth'
 

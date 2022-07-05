@@ -1,8 +1,4 @@
 class SessionsController < ApplicationController
-  DEV_INTUIT_BASE_URL = "https://sandbox-accounts.platform.intuit.com"
-  PROD_INPUT_BASE_URL = "https://accounts.platform.intuit.com"
-  INTUIT_USERINFO_API_ENDPOINT = "/v1/openid_connect/userinfo"
-
   def create
     auth = request.env["omniauth.auth"]
     user = auth ? authenticate_with_omniauth(auth) : authenticate_with_form(params)
