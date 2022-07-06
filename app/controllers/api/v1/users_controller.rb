@@ -1,51 +1,45 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      skip_before_action :verify_authenticity_token
-      before_action :set_user, only: [:show, :update]
+      # skip_before_action :verify_authenticity_token
+      before_action :set_user, only: [:show, :update, :destroy]
 
-      def new
-        @user = User.new
+      def index
+        users = User.all
+        render json: UserSerializer.new(users).serialized_json, status: :ok
+      end
+
+      def show
+        if @user
+          render json: UserSerializer.new(@user).serialized_json, status: :ok
+        else
+          render json: { error: "User not found" }, status: 422
+        end
       end
 
       def create
         user = User.new(user_params)
         if user.save
-          render json: { message: "#{user.employee_name} Successfully Created" }
+          render json: { message: "#{user.employee_name} successfully created" }, status: :created
         else
-          render json: { error: 'Unable to create user' }, status: 422
-        end
-      end
-
-      def index
-        users = User.all
-        render json: UserSerializer.new(users).serialized_json
-      end
-
-      def show
-        user = User.find(user_params[:id])
-        if user
-          render json: UserSerializer.new(user).serialized_json
-        else
-          render json: { error: 'User not found' }, status: 422
+          render json: { error: "Unable to create user" }, status: :unprocessable_entity
         end
       end
 
       def update
-        if user.update(user_params)
-          render json: { message: "#{user.employee_name} Successfully Update" }
+        if @user.update(user_params)
+          render json: { message: "#{@user.employee_name} successfully updated" }, status: :ok
         else
-          render json: { error: 'Unable to update user' }, status: 422
+          render json: { error: "Unable to update user" }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        user = User.find(params[:id])
-        user_name = user.employee_name if user
-        if user.destroy
-          render json: { message: "#{user_name} Successfully Deleted" }
+        user_name = @user.employee_name if @user
+        if @user.destroy
+          render json: { message: "#{user_name} successfully deleted" }, status: :ok
         else
-          render json: { error: 'User not found' }, status: 422
+          render json: { error: "User not found" }, status: :unprocessable_entity
         end
       end
 
@@ -56,7 +50,7 @@ module Api
       end
 
       def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name)
+        params.require(:user).permit(:email, :first_name, :last_name, :title, :role, :uid, :provider)
       end
     end
   end

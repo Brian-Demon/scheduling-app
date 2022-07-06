@@ -4,7 +4,7 @@ module Api
       skip_before_action :verify_authenticity_token
       def create
         auth = request.env["omniauth.auth"]
-        user = auth ? authenticate_with_omniauth(auth) : authenticate_with_form(session_params)
+        user = authenticate_with_omniauth(auth) if auth
         
         if user
           if session[:user_id] == user.id
@@ -29,12 +29,6 @@ module Api
 
       def authenticate_with_omniauth(auth)
         User.find_or_create_with_omniauth(auth)
-      end
-
-      def authenticate_with_form(params)
-        user = User.find_by(email: params[:email])
-        return false unless user.present?
-        user.authenticate(params[:password])
       end
 
       private

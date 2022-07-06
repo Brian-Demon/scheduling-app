@@ -1,60 +1,58 @@
-class SchedulesController < ApplicationController
-  before_action :set_schedule, only: %i[ show edit update destroy ]
+module Api
+  module V1
+    class SchedulesController < ApplicationController
+      # skip_before_action :verify_authenticity_token
+      before_action :set_schedule, only: %i[ show update destroy ]
 
-  def index
-    @schedules = Schedule.all
-  end
-
-  def show
-  end
-
-  def new
-    @schedule = Schedule.new
-  end
-
-  def edit
-  end
-
-  def create
-    @schedule = Schedule.new(schedule_params)
-
-    respond_to do |format|
-      if @schedule.save
-        format.html { redirect_to @schedule, notice: "Schedule was successfully created." }
-        format.json { render :show, status: :created, location: @schedule }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @schedule.errors, status: :unprocessable_entity }
+      def index
+        schedules = Schedule.all
+        render json: ScheduleSerializer.new(schedules).serialized_json, status: :ok
       end
-    end
-  end
 
-  def update
-    respond_to do |format|
-      if @schedule.update(schedule_params)
-        format.html { redirect_to @schedule, notice: "Schedule was successfully updated." }
-        format.json { render :show, status: :ok, location: @schedule }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @schedule.errors, status: :unprocessable_entity }
+      def show
+        if @schedule
+          render json: ScheduleSerializer.new(@schedule).serialized_json, status: :ok
+        else
+          render json: { error: "Unable to find schedule" }, status: :unprocessable_entity
+        end
       end
+
+      def create
+        schedule = Schedule.new(schedule_params)
+
+        if schedule.save
+          render json: { message: "#{schedule.schedule_name} successfully created" }, status: :created
+        else
+          render json: { error: "Unable to create schedule" }, status: :unprocessable_entity
+        end
+      end
+
+      def update
+        if @schedule.update(schedule_params)
+          render json: { message: "#{@schedule.schedule_name} successfully updated" }, status: :ok
+        else
+          render json: { error: "Unable to update schedule" }, status: :unprocessable_entity
+        end
+      end
+
+      def destroy
+        schedule_name = @schedule.schedule_name if @schedule
+        if @schedule.destroy
+          render json: { message: "#{schedule_name} successfully deleted" }, status: :ok
+        else
+          render json: { error: "Schedule not found" }, status: :unprocessable_entity
+        end
+      end
+
+      private
+
+        def set_schedule
+          @schedule = Schedule.find(params[:id])
+        end
+
+        def schedule_params
+          params.require(:schedule).permit(:first_day, :last_day)
+        end
     end
   end
-
-  def destroy
-    @schedule.destroy
-    respond_to do |format|
-      format.html { redirect_to schedules_url, notice: "Schedule was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    def set_schedule
-      @schedule = Schedule.find(params[:id])
-    end
-
-    def schedule_params
-      params.require(:schedule).permit(:first_day, :last_day)
-    end
 end
