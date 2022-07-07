@@ -35,6 +35,6 @@ jobs:
         rails db:migrate
         yarn --frozen-lockfile
     - name: Run Rspec Tests
-        env:
-          RAILS_ENV: test
-        run: bundle exec rspec spec
+      env:
+        RAILS_ENV: test
+      run: bundle exec rspec spec
