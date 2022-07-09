@@ -18,17 +18,11 @@ RSpec.describe "Schedules", type: :request do
     end
 
     it "returns correct first_day" do
-      first_day_year = @first_schedule_data["last_day"].split("T").first.split("-").first.to_i
-      first_day_month = @first_schedule_data["last_day"].split("T").first.split("-").second.to_i
-      first_day_day = @first_schedule_data["last_day"].split("T").first.split("-").third.to_i
-      expect(Date.new(first_day_year, first_day_month, first_day_day)).to eq(@schedule.last_day.to_date)
+      expect(Time.parse(@first_schedule_data["first_day"])).to eq(@schedule.first_day)
     end
 
     it "returns correct last_day" do
-      last_day_year = @first_schedule_data["last_day"].split("T").first.split("-").first.to_i
-      last_day_month = @first_schedule_data["last_day"].split("T").first.split("-").second.to_i
-      last_day_day = @first_schedule_data["last_day"].split("T").first.split("-").third.to_i
-      expect(Date.new(last_day_year, last_day_month, last_day_day)).to eq(@schedule.last_day.to_date)
+      expect(Time.parse(@first_schedule_data["last_day"])).to eq(@schedule.last_day)
     end
   end
 
@@ -45,17 +39,11 @@ RSpec.describe "Schedules", type: :request do
     end
 
     it "returns correct first_day" do
-      first_day_year = @schedule_data["first_day"].split("T").first.split("-").first.to_i
-      first_day_month = @schedule_data["first_day"].split("T").first.split("-").second.to_i
-      first_day_day = @schedule_data["first_day"].split("T").first.split("-").third.to_i
-      expect(Date.new(first_day_year, first_day_month, first_day_day)).to eq(schedule.first_day.to_date)
+      expect(Time.parse(@schedule_data["first_day"]).to_date).to eq(schedule.first_day)
     end
 
     it "returns correct last_day" do
-      last_day_year = @schedule_data["last_day"].split("T").first.split("-").first.to_i
-      last_day_month = @schedule_data["last_day"].split("T").first.split("-").second.to_i
-      last_day_day = @schedule_data["last_day"].split("T").first.split("-").third.to_i
-      expect(Date.new(last_day_year, last_day_month, last_day_day)).to eq(schedule.last_day.to_date)
+      expect(Time.parse(@schedule_data["last_day"]).to_date).to eq(schedule.last_day)
     end
   end
 

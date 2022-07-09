@@ -18,43 +18,11 @@ RSpec.describe "Shifts", type: :request do
     end
 
     it "returns correct shift_start" do
-      shift_start_year = @first_shift_data["shift_start"].split("T").first.split("-").first.to_i
-      shift_start_month = @first_shift_data["shift_start"].split("T").first.split("-").second.to_i
-      shift_start_day = @first_shift_data["shift_start"].split("T").first.split("-").third.to_i
-      shift_start_hour = @first_shift_data["shift_start"].split("T").second.split(".").first.split(":").first.to_i
-      shift_start_minute = @first_shift_data["shift_start"].split("T").second.split(".").first.split(":").second.to_i
-      shift_start_second = @first_shift_data["shift_start"].split("T").second.split(".").first.split(":").third.to_i
-      json_shift_start = Time.new(shift_start_year, shift_start_month, shift_start_day, shift_start_hour, shift_start_minute, shift_start_second)
-
-      @shift_start_year = @shift.shift_start.to_s.split(" ").first.split("-").first.to_i
-      @shift_start_month = @shift.shift_start.to_s.split(" ").first.split("-").second.to_i
-      @shift_start_day = @shift.shift_start.to_s.split(" ").first.split("-").third.to_i
-      @shift_start_hour = @shift.shift_start.to_s.split(" ").second.split(":").first.to_i
-      @shift_start_minute = @shift.shift_start.to_s.split(" ").second.split(":").second.to_i
-      @shift_start_second = @shift.shift_start.to_s.split(" ").second.split(":").third.to_i
-      @shift_start = Time.new(@shift_start_year, @shift_start_month, @shift_start_day, @shift_start_hour, @shift_start_minute, @shift_start_second)
-
-      expect(json_shift_start).to eq(@shift_start)
+      expect(Date.parse(@first_shift_data["shift_start"])).to eq(@shift.shift_start.strftime("%B %d, %Y").to_date)
     end
 
     it "returns correct shift_end" do
-      shift_end_year = @first_shift_data["shift_end"].split("T").first.split("-").first.to_i
-      shift_end_month = @first_shift_data["shift_end"].split("T").first.split("-").second.to_i
-      shift_end_day = @first_shift_data["shift_end"].split("T").first.split("-").third.to_i
-      shift_end_hour = @first_shift_data["shift_end"].split("T").second.split(".").first.split(":").first.to_i
-      shift_end_minute = @first_shift_data["shift_end"].split("T").second.split(".").first.split(":").second.to_i
-      shift_end_second = @first_shift_data["shift_end"].split("T").second.split(".").first.split(":").third.to_i
-      json_shift_end = Time.new(shift_end_year, shift_end_month, shift_end_day, shift_end_hour, shift_end_minute, shift_end_second)
-
-      @shift_end_year = @shift.shift_end.to_s.split(" ").first.split("-").first.to_i
-      @shift_end_month = @shift.shift_end.to_s.split(" ").first.split("-").second.to_i
-      @shift_end_day = @shift.shift_end.to_s.split(" ").first.split("-").third.to_i
-      @shift_end_hour = @shift.shift_end.to_s.split(" ").second.split(":").first.to_i
-      @shift_end_minute = @shift.shift_end.to_s.split(" ").second.split(":").second.to_i
-      @shift_end_second = @shift.shift_end.to_s.split(" ").second.split(":").third.to_i
-      @shift_end = Time.new(@shift_end_year, @shift_end_month, @shift_end_day, @shift_end_hour, @shift_end_minute, @shift_end_second)
-      
-      expect(json_shift_end).to eq(@shift_end)
+      expect(Date.parse(@first_shift_data["shift_end"])).to eq(@shift.shift_end.strftime("%B %d, %Y").to_date)
     end
   end
 
@@ -71,43 +39,11 @@ RSpec.describe "Shifts", type: :request do
     end
 
     it "returns correct shift_start" do
-      shift_start_year = @shift_data["shift_start"].split("T").first.split("-").first.to_i
-      shift_start_month = @shift_data["shift_start"].split("T").first.split("-").second.to_i
-      shift_start_day = @shift_data["shift_start"].split("T").first.split("-").third.to_i
-      shift_start_hour = @shift_data["shift_start"].split("T").second.split(".").first.split(":").first.to_i
-      shift_start_minute = @shift_data["shift_start"].split("T").second.split(".").first.split(":").second.to_i
-      shift_start_second = @shift_data["shift_start"].split("T").second.split(".").first.split(":").third.to_i
-      json_shift_start = Time.new(shift_start_year, shift_start_month, shift_start_day, shift_start_hour, shift_start_minute, shift_start_second)
-
-      @shift_start_year = shift.shift_start.to_s.split(" ").first.split("-").first.to_i
-      @shift_start_month = shift.shift_start.to_s.split(" ").first.split("-").second.to_i
-      @shift_start_day = shift.shift_start.to_s.split(" ").first.split("-").third.to_i
-      @shift_start_hour = shift.shift_start.to_s.split(" ").second.split(":").first.to_i
-      @shift_start_minute = shift.shift_start.to_s.split(" ").second.split(":").second.to_i
-      @shift_start_second = shift.shift_start.to_s.split(" ").second.split(":").third.to_i
-      @shift_start = Time.new(@shift_start_year, @shift_start_month, @shift_start_day, @shift_start_hour, @shift_start_minute, @shift_start_second)
-
-      expect(json_shift_start).to eq(@shift_start)
+      expect(Date.parse(@shift_data["shift_start"])).to eq(shift.shift_start.strftime("%B %d, %Y").to_date)
     end
 
     it "returns correct shift_end" do
-      shift_end_year = @shift_data["shift_end"].split("T").first.split("-").first.to_i
-      shift_end_month = @shift_data["shift_end"].split("T").first.split("-").second.to_i
-      shift_end_day = @shift_data["shift_end"].split("T").first.split("-").third.to_i
-      shift_end_hour = @shift_data["shift_end"].split("T").second.split(".").first.split(":").first.to_i
-      shift_end_minute = @shift_data["shift_end"].split("T").second.split(".").first.split(":").second.to_i
-      shift_end_second = @shift_data["shift_end"].split("T").second.split(".").first.split(":").third.to_i
-      json_shift_end = Time.new(shift_end_year, shift_end_month, shift_end_day, shift_end_hour, shift_end_minute, shift_end_second)
-
-      @shift_end_year = shift.shift_end.to_s.split(" ").first.split("-").first.to_i
-      @shift_end_month = shift.shift_end.to_s.split(" ").first.split("-").second.to_i
-      @shift_end_day = shift.shift_end.to_s.split(" ").first.split("-").third.to_i
-      @shift_end_hour = shift.shift_end.to_s.split(" ").second.split(":").first.to_i
-      @shift_end_minute = shift.shift_end.to_s.split(" ").second.split(":").second.to_i
-      @shift_end_second = shift.shift_end.to_s.split(" ").second.split(":").third.to_i
-      @shift_end = Time.new(@shift_end_year, @shift_end_month, @shift_end_day, @shift_end_hour, @shift_end_minute, @shift_end_second)
-
-      expect(json_shift_end).to eq(@shift_end)
+      expect(Date.parse(@shift_data["shift_end"])).to eq(shift.shift_end.strftime("%B %d, %Y").to_date)
     end
   end
 
