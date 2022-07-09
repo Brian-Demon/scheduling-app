@@ -1,7 +1,6 @@
 module Api
   module V1
     class SchedulesController < ApplicationController
-      # skip_before_action :verify_authenticity_token
       before_action :set_schedule, only: %i[ show update destroy ]
 
       def index
@@ -13,7 +12,7 @@ module Api
         if @schedule
           render json: ScheduleSerializer.new(@schedule).serialized_json, status: :ok
         else
-          render json: { error: "Unable to find schedule" }, status: :unprocessable_entity
+          render json: { error: @schedule.errors }, status: :unprocessable_entity
         end
       end
 
@@ -23,7 +22,7 @@ module Api
         if schedule.save
           render json: { message: "#{schedule.schedule_name} successfully created" }, status: :created
         else
-          render json: { error: "Unable to create schedule" }, status: :unprocessable_entity
+          render json: { error: schedule.errors }, status: :unprocessable_entity
         end
       end
 
@@ -31,7 +30,7 @@ module Api
         if @schedule.update(schedule_params)
           render json: { message: "#{@schedule.schedule_name} successfully updated" }, status: :ok
         else
-          render json: { error: "Unable to update schedule" }, status: :unprocessable_entity
+          render json: { error: @schedule.errors }, status: :unprocessable_entity
         end
       end
 
@@ -40,7 +39,7 @@ module Api
         if @schedule.destroy
           render json: { message: "#{schedule_name} successfully deleted" }, status: :ok
         else
-          render json: { error: "Schedule not found" }, status: :unprocessable_entity
+          render json: { error: @schedule.errors }, status: :unprocessable_entity
         end
       end
 

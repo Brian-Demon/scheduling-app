@@ -8,7 +8,7 @@ module Api
         
         if user
           if session[:user_id] == user.id
-            render json: { error: 'Already logged in' }, status: 422
+            render json: { error: 'Already logged in' }
           else
             session[:user_id] = user.id
             render json: { message: "#{user.employee_name} logged in" }

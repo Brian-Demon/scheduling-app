@@ -1,7 +1,6 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      # skip_before_action :verify_authenticity_token
       before_action :set_user, only: [:show, :update, :destroy]
 
       def index
@@ -13,7 +12,7 @@ module Api
         if @user
           render json: UserSerializer.new(@user).serialized_json, status: :ok
         else
-          render json: { error: "User not found" }, status: 422
+          render json: { error: @user.errors }, status: 422
         end
       end
 
@@ -22,7 +21,7 @@ module Api
         if user.save
           render json: { message: "#{user.employee_name} successfully created" }, status: :created
         else
-          render json: { error: "Unable to create user" }, status: :unprocessable_entity
+          render json: { error: @user.errors }, status: :unprocessable_entity
         end
       end
 
@@ -30,7 +29,7 @@ module Api
         if @user.update(user_params)
           render json: { message: "#{@user.employee_name} successfully updated" }, status: :ok
         else
-          render json: { error: "Unable to update user" }, status: :unprocessable_entity
+          render json: { error: @user.errors }, status: :unprocessable_entity
         end
       end
 
@@ -39,7 +38,7 @@ module Api
         if @user.destroy
           render json: { message: "#{user_name} successfully deleted" }, status: :ok
         else
-          render json: { error: "User not found" }, status: :unprocessable_entity
+          render json: { error: @user.errors }, status: :unprocessable_entity
         end
       end
 

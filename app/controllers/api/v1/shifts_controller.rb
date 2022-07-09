@@ -1,7 +1,6 @@
 module Api
   module V1
     class ShiftsController < ApplicationController
-      # skip_before_action :verify_authenticity_token
       before_action :set_shift, only: %i[ show update destroy ]
 
       def index
@@ -13,7 +12,7 @@ module Api
         if @shift
           render json: ShiftSerializer.new(@shift).serialized_json, status: :ok
         else
-          render json: { error: "Unable to update shift" }, status: :unprocessable_entity
+          render json: { error: @shift.errors }, status: :unprocessable_entity
         end
       end
 
@@ -28,17 +27,17 @@ module Api
         )
 
         if shift.save
-          render json: { message: "Shift for #{shift.user.employee_name} created: #{shift.format_shift(shift.shift_start)} - #{shift.format_shift(shift.shift_end)}" }, status: :created
+          render json: { message: formatted_shift_block(shift) }, status: :created
         else
-          render json: { error: "Unable to create shift" }, status: :unprocessable_entity
+          render json: { error: shift.errors }, status: :unprocessable_entity
         end
       end
 
       def update
         if @shift.update(shift_params)
-          render json: { message: "Shift for #{@shift.user.employee_name} updated: #{@shift.format_shift(@shift.shift_start)} - #{@shift.format_shift(@shift.shift_end)}" }, status: :ok
+          render json: { message: formatted_shift_block(@shift, "updated") }, status: :ok
         else
-          render json: { error: 'Unable to update shift' }, status: :unprocessable_entity
+          render json: { error: @shift.errors }, status: :unprocessable_entity
         end
       end
 
@@ -48,7 +47,7 @@ module Api
         if @shift.destroy
           render json: { message: "Shift owned by #{shift_user_name} for schedule #{shift_schedule_name} successfully deleted" }, status: :ok
         else
-          render json: { error: "Unable to destroy shift" }, status: :unprocessable_entity
+          render json: { error: @shift.errors }, status: :unprocessable_entity
         end
       end
 
@@ -56,6 +55,10 @@ module Api
 
       def set_shift
         @shift = Shift.find(params[:id])
+      end
+
+      def formatted_shift_block(shift, type = "created")
+        "Shift for #{shift.user.employee_name} #{type}: #{shift.format_shift(shift.shift_start)} - #{shift.format_shift(shift.shift_end)}"
       end
 
       def shift_params
