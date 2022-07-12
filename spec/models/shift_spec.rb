@@ -30,10 +30,10 @@ RSpec.describe Shift, type: :model do
   end
 
   it "returns the formatted shift_start using format_shift" do
-    expect(shift.format_shift(shift.shift_start)).to eq(shift.shift_start.strftime("%b %d, %Y @ %H:%M"))
+    expect(shift.format_shift(shift.shift_start)).to eq("Sep 01, 2022 @ 23:00")
   end
 
   it "returns the formatted shift_end using format_shift" do
-    expect(shift.format_shift(shift.shift_end)).to eq(shift.shift_end.strftime("%b %d, %Y @ %H:%M"))
+    expect(shift.format_shift(shift.shift_end)).to eq("Sep 02, 2022 @ 07:00")
   end
 end

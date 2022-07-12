@@ -18,11 +18,11 @@ RSpec.describe "Shifts", type: :request do
     end
 
     it "returns correct shift_start" do
-      expect(Date.parse(@first_shift_data["shift_start"])).to eq(@shift.shift_start.strftime("%B %d, %Y").to_date)
+      expect(Date.parse(@first_shift_data["shift_start"])).to eq(@shift.shift_start.to_date)
     end
 
     it "returns correct shift_end" do
-      expect(Date.parse(@first_shift_data["shift_end"])).to eq(@shift.shift_end.strftime("%B %d, %Y").to_date)
+      expect(Date.parse(@first_shift_data["shift_end"])).to eq(@shift.shift_end.to_date)
     end
   end
 
@@ -39,11 +39,11 @@ RSpec.describe "Shifts", type: :request do
     end
 
     it "returns correct shift_start" do
-      expect(Date.parse(@shift_data["shift_start"])).to eq(shift.shift_start.strftime("%B %d, %Y").to_date)
+      expect(Date.parse(@shift_data["shift_start"])).to eq(shift.shift_start.to_date)
     end
 
     it "returns correct shift_end" do
-      expect(Date.parse(@shift_data["shift_end"])).to eq(shift.shift_end.strftime("%B %d, %Y").to_date)
+      expect(Date.parse(@shift_data["shift_end"])).to eq(shift.shift_end.to_date)
     end
   end
 

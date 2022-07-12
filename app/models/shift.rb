@@ -13,18 +13,37 @@ class Shift < ApplicationRecord
   def validate_shift
     if !user.present?
       errors.add(:user, "must be present")
-    elsif !schedule.present?
+      return
+    end
+    
+    if !schedule.present?
       errors.add(:schedule, "must be present")
-    elsif !shift_start.present?
+      return
+    end
+
+    if !shift_start.present?
       errors.add(:shift_start, "must be present")
-    elsif !shift_end.present?
+      return
+    end
+    
+    if !shift_end.present?
       errors.add(:shift_end, "must be present")
-    elsif shift_start > shift_end
+      return
+    end
+
+    if shift_start > shift_end
       errors.add(:shift_end, "must be after the shift start date")
-    elsif shift_start < schedule.first_day
+      return
+    end
+
+    if shift_start < schedule.first_day
       errors.add(:shift_start, "must fall within the schedule dates")
-    elsif shift_end > schedule.last_day
+      return
+    end
+
+    if shift_end > schedule.last_day
       errors.add(:shift_end, "must fall within the schedule dates")
+      return
     end
   end
 end
