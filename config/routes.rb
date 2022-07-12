@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :users
       resources :schedules
       resources :shifts
+      resources :tests
     end
   end
 
