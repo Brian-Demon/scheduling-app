@@ -7,11 +7,9 @@ const LoginButton = () => {
   }
 
   return (
-    <>
-      <div id="login_button">
-        <Button variant="dark" onClick={() => handleLoginClick()}>Login</Button>{' '}
-      </div>
-    </>
+    <div id="login-button">
+      <Button variant="dark" onClick={() => handleLoginClick()}>Login</Button>{' '}
+    </div>
   )
 }
 

@@ -8,13 +8,13 @@ import Test from './pages/Test'
 
 const App = () => {
   return (
-    <>
+    <div id="schedule">
       <NavBar />
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route exact path="/test" element={<Test />} />
       </Routes>
-    </>
+    </div>
   )
 }
 
