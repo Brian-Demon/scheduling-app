@@ -19,16 +19,19 @@ RSpec.describe User, type: :model do
   it "is not valid without email" do
     user.email = nil
     expect(user).to_not be_valid
+    expect(user.errors[:email]).to include("can't be blank")
   end
 
   it "is not valid without provider" do
     user.provider = nil
     expect(user).to_not be_valid
+    expect(user.errors[:provider]).to include("can't be blank")
   end
 
   it "is not valid without uid" do
     user.uid = nil
     expect(user).to_not be_valid
+    expect(user.errors[:uid]).to include("can't be blank")
   end
 
   it "returns the employee name (full name) for a user" do
