@@ -47,7 +47,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: scheduling-app
+  database: scheduling-app-test
   pool: 5
   username: postgres
   password: lolpassword

@@ -3,15 +3,16 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      get "login", to: "sessions#new"
-      post "login", to: "sessions#create"
-      delete "logout", to: "sessions#destroy"
       resources :users
       resources :schedules
       resources :shifts
       resources :tests
     end
   end
+
+  get "/auth/:provider/callback", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+  get '/logged_in', to: 'sessions#is_logged_in?'
 
   get '*path', to: 'pages#index', via: :all
 end
