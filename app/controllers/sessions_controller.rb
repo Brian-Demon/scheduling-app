@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:destroy]
+
   def create
     auth = request.env["omniauth.auth"]
     @user = authenticate_with_omniauth(auth) if auth
